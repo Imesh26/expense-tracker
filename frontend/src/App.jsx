@@ -12,7 +12,7 @@ function App() {
   // Fetch Data (Backend)
   const getTransactions = async () => {
     try {
-      const res = await axios.get('https://expense-tracker-jet-alpha.vercel.app/');
+      const res = await axios.get('https://expense-tracker-jet-alpha.vercel.app/api/v1/transactions');
       setTransactions(res.data.data);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -29,7 +29,7 @@ function App() {
     const newTransaction = { text, amount: +amount, category: 'General' };
     
     try {
-      await axios.post('https://expense-tracker-jet-alpha.vercel.app/', newTransaction);
+      await axios.post('https://expense-tracker-jet-alpha.vercel.app/api/v1/transactions', newTransaction);
       getTransactions(); 
       setText('');
       setAmount(0);
@@ -41,7 +41,7 @@ function App() {
   // Delete Transaction
   const deleteTransaction = async (id) => {
     try {
-      await axios.delete(`https://expense-tracker-jet-alpha.vercel.app/${id}`);
+      await axios.delete(`https://expense-tracker-jet-alpha.vercel.app/api/v1/transactions/${id}`);
       getTransactions();
     } catch (err) {
       console.error("Error deleting:", err);
